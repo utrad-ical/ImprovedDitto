@@ -1,0 +1,40 @@
+data_list:
+  training_data:
+    clientName1: /data/dir/for/client1
+    clientName2: /data/dir/for/client2
+    clientName3: /data/dir/for/client3
+  validation_data:
+    clientName1: /validation/data/dir/for/client1
+    clientName2: /validation/data/dir/for/client2
+    clientName3: /validation/data/dir/for/client3
+
+train_parameter:
+  learning_rate: 0.01
+  batch_size: 12
+  max_round: 100
+  early_stopping: 0 
+  data_augmentation_num: 2 
+
+fl_parameter:
+  client_names_list:
+    - clientName1
+    - clientName2
+    - clientName3
+  client_num: 3
+  epoch_per_round: 1
+  mu: 0.1 (lambda)
+  is_ratio: False
+  first_except: False
+
+dp_parameter:
+  do_dp: False
+  dp_secure_mode: False
+  dp_max_grad: 1.0 
+  noise_multiplier: 0.1 
+  dp_max_physical_batch_size: 12
+
+other:
+  output_path: /output/result/path
+  gpu_id: 0
+  time_stamp: ""
+  is_grad: true/false

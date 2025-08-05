@@ -205,3 +205,25 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# for PyTorch model
+*.pth
+*.onnx
+
+# for data
+*.txt
+*.csv
+*.json
+*.yml
+*.xlsx
+*.jpg
+*.png
+*.tif
+*.dcm
+*.raw
+*.mhd
+*.npz
+*.yaml
+*.yml
+
+*.bash

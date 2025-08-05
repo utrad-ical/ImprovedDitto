@@ -1,0 +1,55 @@
+FROM nvidia/cuda:11.1.1-cudnn8-runtime-ubuntu20.04
+
+# Set default shell to /bin/bash
+SHELL ["/bin/bash", "-cu"]
+
+#RUN sed -i.bak -e "s%http://[^ ]\+%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
+
+RUN apt-get update &&\
+    DEBIAN_FRONTEND=noninteractive apt-get -y install gosu &&\
+    apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends tzdata
+# timezone setting
+ENV TZ=Asia/Tokyo
+
+# RUN apt-get update && apt-get upgrade -y
+# RUN apt-get install -y libgl1-mesa-dev
+
+RUN apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
+        build-essential \
+        git \
+        curl \
+        wget \
+        vim \
+        software-properties-common \
+        python3-dev \
+        pkg-config
+
+RUN ln -s /usr/bin/python3.8 /usr/bin/python
+
+RUN curl -O  https://bootstrap.pypa.io/pip/get-pip.py && \ 
+    python get-pip.py && \
+    rm get-pip.py
+
+RUN pip install --no-cache-dir numpy==1.21.4 scipy==1.7.1 scikit-learn==1.0 \
+                               scikit-image==0.18.3 pandas==1.3.4 matplotlib==3.4.3 \
+                               Cython==0.29.24 ipython==7.28.0 msgpack==1.0.2 \
+                               statsmodels==0.13.0 memory-profiler==0.58.0 seaborn==0.11.2 \
+                               pydot==1.4.2 h5py==3.1.0 luigi==3.0.3 tables==3.6.1 toposort==1.7 \
+                               opencv-python==4.5.3.56 opencv-contrib-python==4.5.3.56 \
+                               pydicom==2.2.2 python-gdcm==3.0.19 SimpleITK==2.1.1 \
+                               protobuf==3.20.1 tqdm==4.64.1 PyYAML==6.0
+
+RUN pip install --no-cache-dir torch==1.12.1+cu113 \
+                                torchvision==0.13.1+cu113 \
+                                torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
+
+# install opacus
+RUN pip install --no-deps --no-cache-dir opacus==1.2.0 \
+                                         opt-einsum==3.3.0 \
+                                         functorch==0.2.1
+
+RUN apt-get install -y libgl1-mesa-dev
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
