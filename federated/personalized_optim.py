@@ -55,7 +55,7 @@ class ProposedPerturbedGradientDescent(Optimizer):
                 else:
                     d_p = p.grad.data + mu * (p.data - g.data)
                     
-                    assert mu == -float('inf')
+                    assert mu != -float('inf')
                 
                 if loss_path is not None:
                     with open(loss_path, 'a') as fp:
