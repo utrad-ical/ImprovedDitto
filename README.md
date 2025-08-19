@@ -1,4 +1,4 @@
-# Improving personalized federated learning to optimize site-specific performance in computer-aided detection/diagnosis [SPIE Journal of Medical Imaging]
+# Improving personalized federated learning to optimize site-specific performance in computer-aided detection/diagnosis
 
 this is an official implementation of ***Improved Ditto***. [[Link]]()
 
@@ -78,13 +78,13 @@ use /centralized/centralized_train.py
 ### for FL (FedAvg)
         data_list:
         training_data:
-            - /mnt/nas-public/OpenBTAI/OpenBTAI_case_list_20240424/GE/training
-            - /mnt/nas-public/OpenBTAI/OpenBTAI_case_list_20240424/Philips/training
-            - /mnt/nas-public/OpenBTAI/OpenBTAI_case_list_20240424/Siemens/training
+            - /data/dir/for/client1
+            - /data/dir/for/client2
+            - /data/dir/for/client3
         validation_data:
-            - /mnt/nas-public/OpenBTAI/OpenBTAI_case_list_20240424/GE/validation
-            - /mnt/nas-public/OpenBTAI/OpenBTAI_case_list_20240424/Philips/validation
-            - /mnt/nas-public/OpenBTAI/OpenBTAI_case_list_20240424/Siemens/validation
+            - /validation/data/dir/for/client1
+            - /validation/data/dir/for/client2
+            - /validation/data/dir/for/client3
 
         train_parameter:
             learning_rate: 0.01
